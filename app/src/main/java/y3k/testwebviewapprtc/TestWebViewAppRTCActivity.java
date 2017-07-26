@@ -16,7 +16,7 @@ import android.webkit.WebViewClient;
 public class TestWebViewAppRTCActivity extends AppCompatActivity {
 
     WebView webView;
-    boolean[] videoElementDisplayingSetTo = true;
+    boolean videoElementDisplayingSetTo = true;
     
     @SuppressLint("SetJavaScriptEnabled")
     @Override
