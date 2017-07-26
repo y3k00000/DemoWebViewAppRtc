@@ -16,7 +16,8 @@ import android.webkit.WebViewClient;
 public class TestWebViewAppRTCActivity extends AppCompatActivity {
 
     WebView webView;
-
+    boolean[] videoElementDisplayingSetTo = true;
+    
     @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,13 +25,12 @@ public class TestWebViewAppRTCActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         webView = (WebView)findViewById(R.id.web_view);
         final String tag = "WEB_DEBUG";
-        final boolean[] videoElementDisplayingSetTo = new boolean[]{true};
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setWebViewClient(new WebViewClient(){
             @Override
             public void onPageFinished(WebView view, String url) {
                 Log.d(tag,"onPageFinished "+url);
-                videoElementDisplayingSetTo[0] = false;
+                videoElementDisplayingSetTo = false;
                 view.loadUrl("javascript:(document.getElementById(\"videos\").style.display='none')();");
             }
 
@@ -44,7 +44,7 @@ public class TestWebViewAppRTCActivity extends AppCompatActivity {
             @Override
             public WebResourceResponse shouldInterceptRequest(final WebView view, String url) {
                 Log.d(tag,"shouldInterceptRequest url="+url);
-                if(!videoElementDisplayingSetTo[0]&&url.startsWith("https://appr.tc/join/")){
+                if(!videoElementDisplayingSetTo&&url.startsWith("https://appr.tc/join/")){
                     // Strange, this should be called on main thread but I found it not.
                     runOnUiThread(new Runnable() {
                         @Override
@@ -52,7 +52,7 @@ public class TestWebViewAppRTCActivity extends AppCompatActivity {
                             view.loadUrl("javascript:(document.getElementById(\"videos\").style.display='block')();");
                         }
                     });
-                    videoElementDisplayingSetTo[0] = true;
+                    videoElementDisplayingSetTo = true;
                 }
                 return super.shouldInterceptRequest(view, url);
             }
@@ -75,7 +75,7 @@ public class TestWebViewAppRTCActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        webView.loadData("<html><html>","text/html","utf8");
+        webView.loadData("<html></html>","text/html","utf8");
     }
 
 }
