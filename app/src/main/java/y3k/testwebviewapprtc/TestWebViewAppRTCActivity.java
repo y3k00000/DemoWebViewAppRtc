@@ -22,7 +22,7 @@ public class TestWebViewAppRTCActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_web);
         webView = (WebView)findViewById(R.id.web_view);
         final String tag = "WEB_DEBUG";
         webView.getSettings().setJavaScriptEnabled(true);
@@ -69,7 +69,7 @@ public class TestWebViewAppRTCActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        webView.loadUrl("https://appr.tc");
+        webView.loadUrl(getIntent().getStringExtra("url"));
     }
 
     @Override

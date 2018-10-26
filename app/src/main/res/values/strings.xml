@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">TestWebViewAppRtc</string>
+    <string name="call">call</string>
+    <string name="cmorertc_root">https://api.cmoremap.com.tw:8050/</string>
+    <string name="cmorertc_url_call">https://api.cmoremap.com.tw:8050/call/</string>
+    <string name="apprtc_url">https://appr.tc/r/</string>
+    <string name="apprtc_hint_id">apprtc id</string>
+    <string name="cmorertc_from">/from/</string>
+    <string name="cmorertc_hint_from">from</string>
+    <string name="text_btn_go">GO!!</string>
 </resources>
